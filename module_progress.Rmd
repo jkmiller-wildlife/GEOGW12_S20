@@ -20,9 +20,12 @@ progress <- read_csv("module_progress.csv")
 ```
 
 ```{r}
+total <- count(progress)
+
 summary <- progress %>% 
   group_by(chapter) %>% 
-  count(chapter)
+  count(chapter) %>% 
+  mutate(percent = (n/(total$n))*100)
 ```
 
 
@@ -32,9 +35,18 @@ plot <- ggplot(summary, aes(x = chapter, y = n, fill = chapter)) +
   theme_classic() +
   labs(x = "Chapter Completed",
        y = "Number of Students",
-       title = "Module Chapters Completed")
+       title = "Number of students that have completed each module chapter")
 
 plot
 ```
 
+```{r}
+plot <- ggplot(summary, aes(x = chapter, y = percent, fill = chapter)) +
+  geom_col() +
+  theme_classic() +
+  labs(x = "Chapter Completed",
+       y = "Percentage of Students",
+       title = "Percentage of students that have completed each module chapter")
 
+plot
+```
