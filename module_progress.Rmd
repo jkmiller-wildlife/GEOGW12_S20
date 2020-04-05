@@ -27,14 +27,12 @@ summary <- progress %>%
 
 
 ```{r}
-plot <- ggplot(summary, aes(x = chapter, y = n)) +
+plot <- ggplot(summary, aes(x = chapter, y = n, fill = chapter)) +
   geom_col() +
   theme_classic() +
   labs(x = "Chapter Completed",
        y = "Number of Students",
-       title = "Module Chapters Completed") 
-  
-  
+       title = "Module Chapters Completed")
 
 plot
 ```
