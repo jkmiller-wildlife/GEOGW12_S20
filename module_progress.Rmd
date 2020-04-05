@@ -1,0 +1,42 @@
+---
+title: "Module Progress"
+author: "Jamie Miller"
+date: "April 5, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE}
+library(tidyverse)
+
+```
+
+
+```{r, echo = FALSE, message = FALSE}
+progress <- read_csv("module_progress.csv")
+```
+
+```{r}
+summary <- progress %>% 
+  group_by(chapter) %>% 
+  count(chapter)
+```
+
+
+```{r}
+plot <- ggplot(summary, aes(x = chapter, y = n)) +
+  geom_col() +
+  theme_classic() +
+  labs(x = "Chapter Completed",
+       y = "Number of Students",
+       title = "Module Chapters Completed") 
+  
+  
+
+plot
+```
+
+
